@@ -1,0 +1,25 @@
+Spring Cloud Stream Testing with Embedded Kafka/Rabbit Broker Sample
+==============================================================
+
+In this *Spring Cloud Stream* sample, an embedded kafka/Rabbit broker is used for testing.
+
+## Requirements
+
+To run this sample, you will need to have installed:
+
+* Java 8 or Above
+
+## Code Tour
+
+This sample is a Spring Boot application that uses Spring Cloud Stream to send a `String` message to 2 channels.
+The channel 1 will use a group of consumers loadbalancing.
+the channel 2 will braodcoast to 2 consumers.
+
+## Building with Maven
+
+Build the sample and run the test by executing:
+
+`./mvnw clean package`
+
+or run the test in your favorite IDE.
+

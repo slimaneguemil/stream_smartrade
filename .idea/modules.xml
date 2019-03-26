@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/ClientReactor/ClientReactor.iml" filepath="$PROJECT_DIR$/ClientReactor/ClientReactor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ClientRxJava/ClientRxJava.iml" filepath="$PROJECT_DIR$/ClientRxJava/ClientRxJava.iml" />
       <module fileurl="file://$PROJECT_DIR$/ServiceProducer/ServiceProducer.iml" filepath="$PROJECT_DIR$/ServiceProducer/ServiceProducer.iml" />
       <module fileurl="file://$PROJECT_DIR$/rxjava/rxjava.iml" filepath="$PROJECT_DIR$/rxjava/rxjava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rxjava2/rxjava2.iml" filepath="$PROJECT_DIR$/rxjava2/rxjava2.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/stream_smartrade2_RxJava.iml" filepath="$PROJECT_DIR$/.idea/stream_smartrade2_RxJava.iml" />
     </modules>
   </component>

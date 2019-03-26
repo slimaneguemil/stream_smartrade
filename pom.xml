@@ -9,7 +9,8 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>ServiceProducer</module>
+        <module>ClientReactor</module>
+        <module>ClientRxJava</module>
     </modules>
 
     <parent>
@@ -18,8 +19,6 @@
         <version>2.1.4.BUILD-SNAPSHOT</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-
-
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

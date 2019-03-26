@@ -6,18 +6,28 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="ClientReactor" />
+        <module name="ClientRxJava" />
         <module name="rxjava" />
+        <module name="rxjava2" />
         <module name="ServiceProducer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="ClientReactor" target="1.8" />
+      <module name="ClientRxJava" target="1.8" />
       <module name="rxjava" target="8" />
+      <module name="rxjava2" target="1.8" />
       <module name="ServiceProducer" target="1.8" />
+      <module name="stream_smartrade2_RxJava" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="ClientReactor" options="-parameters" />
+      <module name="ClientRxJava" options="-parameters" />
       <module name="ServiceProducer" options="-parameters" />
+      <module name="rxjava2" options="-parameters" />
     </option>
   </component>
 </project>

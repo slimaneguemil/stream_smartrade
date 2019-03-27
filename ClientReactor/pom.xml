@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>com.mks</groupId>
-            <artifactId>ServiceProducer</artifactId>
+            <artifactId>BrokerConnector</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 

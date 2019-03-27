@@ -25,7 +25,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="ServiceProducer" />
+    <orderEntry type="module" module-name="BrokerConnector" />
     <orderEntry type="library" name="Maven: org.springframework.cloud:spring-cloud-stream-binder-kafka:2.2.0.BUILD-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.cloud:spring-cloud-stream-binder-kafka-core:2.2.0.BUILD-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.integration:spring-integration-kafka:3.1.0.RELEASE" level="project" />

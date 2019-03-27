@@ -6,15 +6,17 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="BrokerConnector" />
         <module name="ClientReactor" />
+        <module name="ClientRest" />
         <module name="ClientRxJava" />
         <module name="rxjava" />
-        <module name="rxjava2" />
-        <module name="ServiceProducer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="BrokerConnector" target="1.8" />
       <module name="ClientReactor" target="1.8" />
+      <module name="ClientRest" target="1.8" />
       <module name="ClientRxJava" target="1.8" />
       <module name="rxjava" target="8" />
       <module name="rxjava2" target="1.8" />
@@ -24,7 +26,9 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="BrokerConnector" options="-parameters" />
       <module name="ClientReactor" options="-parameters" />
+      <module name="ClientRest" options="-parameters" />
       <module name="ClientRxJava" options="-parameters" />
       <module name="ServiceProducer" options="-parameters" />
       <module name="rxjava2" options="-parameters" />

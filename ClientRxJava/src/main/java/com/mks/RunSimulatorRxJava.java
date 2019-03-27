@@ -30,30 +30,31 @@ public class RunSimulatorRxJava implements CommandLineRunner {
     }
 
     public void run(String[] args) {
-        PublishSubject<Foo> subject = channelServiceRxJava.subject;
-        System.out.println("args = " + args);
-        Subscription s1 = subject.subscribe(getFirstObserver());
-        Subscription s2 = subject.subscribe(getSecondObserver());
+        //PublishSubject<Foo> subject = channelServiceRxJava.getSubject();
 
-        Foo foo1 = new Foo();
-        foo1.setId(100);
-        foo1.setName("message 1");
-        foo1.setTag("1");
-        channelServiceRxJava.publish(foo1);
-
-        Foo foo2 = new Foo();
-        foo2.setId(100);
-        foo2.setName("message 1");
-        foo2.setTag("1");
-        channelServiceRxJava.publish(foo2);
-
-        //s1.unsubscribe();
-
-        Foo foo3 = new Foo();
-        foo3.setId(100);
-        foo3.setName("message 3");
-        foo3.setTag("1");
-        channelServiceRxJava.publish(foo3);
+       // Subscription s1 = subject.subscribe(getFirstObserver());
+//        Subscription s1 = channelServiceRxJava.subscribe(getFirstObserver());
+//        Subscription s2 = channelServiceRxJava.subscribe(getSecondObserver());
+//
+//        Foo foo1 = new Foo();
+//        foo1.setId(100);
+//        foo1.setName("rxjva message 1");
+//        foo1.setTag("1");
+//        channelServiceRxJava.publish(foo1);
+//
+//        Foo foo2 = new Foo();
+//        foo2.setId(100);
+//        foo2.setName("rxjava message 2");
+//        foo2.setTag("1");
+//        channelServiceRxJava.publish(foo2);
+//       channelServiceRxJava.unSubscribe(s1);
+//        //s1.unsubscribe();
+//
+//        Foo foo3 = new Foo();
+//        foo3.setId(100);
+//        foo3.setName("rx java message 3");
+//        foo3.setTag("1");
+//        channelServiceRxJava.publish(foo3);
 
 
     }
@@ -100,7 +101,7 @@ public class RunSimulatorRxJava implements CommandLineRunner {
     @RequestMapping("/publish/{name}")
     String hi(@PathVariable String name) {
         String message = "Hello, " + name + "!";
-        System.out.println("received from object rest :"+ message);
+        //System.out.println("received from object rest :"+ message);
         Foo foo1 = new Foo();
         foo1.setId(100);
         foo1.setName(message);

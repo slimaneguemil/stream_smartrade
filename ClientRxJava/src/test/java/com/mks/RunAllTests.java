@@ -23,7 +23,7 @@ public class RunAllTests {
 
     Integer subscriber1 = 0;
     Integer subscriber2 = 0;
-    
+
     Observer<Foo> getObserver1() {
         return new Observer<Foo>() {
 

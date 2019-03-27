@@ -1,13 +1,13 @@
 ## About this Project
-The aim of this project is to established a agnostic client able to communicate with any message-broker.
+The aim of this project is to established an agnostic reactive client and communicate with any message-broker.
 It uses the reacting programming paradigm from end to end of the flow.
 
 It is composed of 4 Modules:
 
 BrokerConnector Module: 
-It contains all the underliying logic to communicate with brokers: with SpringCLoud Stream.
-It creates 2 channels : output for outgoing , input for incoming.
-It creates 2 services for each reactive framework : rxjava and reactor .
+It contains all the underliying logic to communicate with broker  ( based on SpringCLoud Stream)
+It creates automatically 2 channels : output channel for outgoing messages, input channel for incoming.
+It generate  2 bean services for each reactive framework : rxjava and reactor .
 
 ClientRxJava Module:
 It contains a Rxjava  end client to establish reacting communication with BrokerConnector.

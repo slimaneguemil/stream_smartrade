@@ -11,14 +11,17 @@ It generate  2 bean services for each reactive framework : rxjava and reactor .
 
 ClientRxJava Module:
 It contains a Rxjava  end client to establish reacting communication with BrokerConnector.
-with the properties we can desin dynamically channel communication with brokers.
+with the properties we can design dynamically channel communication with brokers.
 see unit testing to see functionnalities.
 
 ClientReactor Module:
 It contains a Reactor end client to establish reacting communication with BrokerConnector.
-with the properties we can desin dynamically channel communication with brokers.
-
+with the properties we can design dynamically channel communication with brokers.
+ 
 ClientRest :
-in progress to communicate with spring Webflux.
+point-to-point solution based on spring Webflux.
 
 
+in study:
+ClientWebsocket /ServerWebsocket: web socket client-server solution to establish connection with Brokerconnectorbased on Reactor.
+clientRSocket/ServerRSocket : rsocket client-server solution to establish connection with Brokerconnectorbased on Reactor.

@@ -10,7 +10,9 @@
         <module name="ClientReactor" />
         <module name="ClientRest" />
         <module name="ClientRxJava" />
+        <module name="ReactorConnector" />
         <module name="rxjava" />
+        <module name="RxJavaConnector" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -18,8 +20,10 @@
       <module name="ClientReactor" target="1.8" />
       <module name="ClientRest" target="1.8" />
       <module name="ClientRxJava" target="1.8" />
+      <module name="ReactorConnector" target="1.8" />
       <module name="rxjava" target="8" />
       <module name="rxjava2" target="1.8" />
+      <module name="RxJavaConnector" target="1.8" />
       <module name="ServiceProducer" target="1.8" />
       <module name="stream_smartrade2_RxJava" target="1.8" />
     </bytecodeTargetLevel>
@@ -30,6 +34,8 @@
       <module name="ClientReactor" options="-parameters" />
       <module name="ClientRest" options="-parameters" />
       <module name="ClientRxJava" options="-parameters" />
+      <module name="ReactorConnector" options="-parameters" />
+      <module name="RxJavaConnector" options="-parameters" />
       <module name="ServiceProducer" options="-parameters" />
       <module name="rxjava2" options="-parameters" />
     </option>

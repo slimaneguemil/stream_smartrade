@@ -6,6 +6,8 @@
       <module fileurl="file://$PROJECT_DIR$/ClientReactor/ClientReactor.iml" filepath="$PROJECT_DIR$/ClientReactor/ClientReactor.iml" />
       <module fileurl="file://$PROJECT_DIR$/ClientRest/ClientRest.iml" filepath="$PROJECT_DIR$/ClientRest/ClientRest.iml" />
       <module fileurl="file://$PROJECT_DIR$/ClientRxJava/ClientRxJava.iml" filepath="$PROJECT_DIR$/ClientRxJava/ClientRxJava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ReactorConnector/ReactorConnector.iml" filepath="$PROJECT_DIR$/ReactorConnector/ReactorConnector.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RxJavaConnector/RxJavaConnector.iml" filepath="$PROJECT_DIR$/RxJavaConnector/RxJavaConnector.iml" />
       <module fileurl="file://$PROJECT_DIR$/rxjava/rxjava.iml" filepath="$PROJECT_DIR$/rxjava/rxjava.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/stream_smartrade2_RxJava.iml" filepath="$PROJECT_DIR$/.idea/stream_smartrade2_RxJava.iml" />
     </modules>

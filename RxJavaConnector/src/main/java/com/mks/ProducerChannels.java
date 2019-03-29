@@ -6,9 +6,11 @@ import org.springframework.messaging.MessageChannel;
 public interface ProducerChannels {
 
 
- String OUTPUTBROADCAST = "output";
+ String OUTPUT1= "output1";
+ String OUTPUT2= "output2";
 
- @Output(OUTPUTBROADCAST)
- MessageChannel broadcastGreetings();
-
+ @Output(OUTPUT1)
+ MessageChannel output1();
+ @Output(OUTPUT2)
+ MessageChannel output2();
 }

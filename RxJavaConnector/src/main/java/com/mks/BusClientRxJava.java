@@ -11,13 +11,13 @@ public class BusClientRxJava implements  BusClientInterface{
 
 
     @Override
-    public void publish(Foo payload) {
-        channelServiceRxJava.publish(payload);
+    public void publish(BusClientInterface.Bus bus ,Foo payload) {
+        channelServiceRxJava.publish(bus, payload);
     }
 
     @Override
-    public Subscription subscribe(Observer<Foo> t) {
-        return channelServiceRxJava.subscribe(t);
+    public Subscription subscribe(BusClientInterface.Bus bus , Observer<Foo> t) {
+        return channelServiceRxJava.subscribe(bus, t);
     }
 
     @Override

@@ -21,13 +21,17 @@ public class ChannelStreams {
 
     }
 
-    @StreamListener(ConsumerChannels.INPUTBROADCASTS)
-    private void subscribeBroadcast(Foo message) {
-        log.info("@StreamListener for BROADCAST received:" + message);
-        this.channelServiceRxJava.getSubject().onNext(message);
+    @StreamListener(ConsumerChannels.INPUT1)
+    private void subscribeBroadcast1(Foo message) {
+        log.info("@StreamListener for BROADCAST1 received:" + message);
+        this.channelServiceRxJava.getSubject_channel1().onNext(message);
     }
 
 
-
+    @StreamListener(ConsumerChannels.INPUT2)
+    private void subscribeBroadcast2(Foo message) {
+        log.info("@StreamListener for BROADCAST2 received:" + message);
+        this.channelServiceRxJava.getSubject_channel2().onNext(message);
+    }
 
 }

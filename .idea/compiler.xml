@@ -7,10 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="BrokerConnector" />
-        <module name="ClientReactor" />
         <module name="ClientRest" />
         <module name="ClientRxJava" />
-        <module name="ReactorConnector" />
         <module name="rxjava" />
         <module name="RxJavaConnector" />
       </profile>

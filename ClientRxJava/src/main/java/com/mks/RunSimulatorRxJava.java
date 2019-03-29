@@ -30,30 +30,14 @@ public class RunSimulatorRxJava implements CommandLineRunner {
     }
 
     public void run(String[] args) {
-
-         Subscription s1 = busClientRxJava().subscribe(getFirstObserver());
-  //      Subscription s2 = channelServiceRxJava.subscribe(getSecondObserver());
+//
+         Subscription s1 = busClientRxJava().subscribe(BusClientInterface.Bus.DEALS, getFirstObserver());
 //
         Foo foo1 = new Foo();
         foo1.setId(100);
         foo1.setName("rxjva message 1");
         foo1.setTag("1");
-        busClientRxJava().publish(foo1);
-//
-//        Foo foo2 = new Foo();
-//        foo2.setId(100);
-//        foo2.setName("rxjava message 2");
-//        foo2.setTag("1");
-//        busClientRxJava().publish(foo2);
-//        busClientRxJava().unSubscribe(s1);
-//        s1.unsubscribe();
-
-//        Foo foo3 = new Foo();
-//        foo3.setId(100);
-//        foo3.setName("rx java message 3");
-//        foo3.setTag("1");
-//        channelServiceRxJava.publish(foo3);
-
+        busClientRxJava().publish(BusClientInterface.Bus.DEALS, foo1);
 
     }
 
@@ -105,7 +89,7 @@ public class RunSimulatorRxJava implements CommandLineRunner {
         foo1.setName(message);
         foo1.setTag("1");
 
-        busClientRxJava().publish(foo1);
+        busClientRxJava().publish(BusClientInterface.Bus.DEALS, foo1);
         return "//nSuccess";
     }
 

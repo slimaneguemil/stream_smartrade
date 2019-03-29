@@ -13,35 +13,55 @@ import rx.subjects.PublishSubject;
 @Service
 public class ChannelServiceRxJava implements BusClientInterface {
     Log log = LogFactory.getLog(getClass());
-    PublishSubject<Foo> subject = PublishSubject.create();
+    PublishSubject<Foo> subject_channel1 = PublishSubject.create();
+    PublishSubject<Foo> subject_channel2 = PublishSubject.create();
 
-    private final MessageChannel broadcast;
+    private final MessageChannel channel1, channel2;
 
-    //@Autowired
-    private ProducerChannels channels;
 
-//    ChannelServiceRxJava(){
-//        this.broadcast = this.channels.broadcastGreetings();
-//
-//    }
 
     ChannelServiceRxJava(ProducerChannels channels){
-    this.broadcast = channels.broadcastGreetings();
-        //this.direct = channels.directGreetings();
+        this.channel1 = channels.output1();
+        this.channel2 = channels.output2();
     }
 
-    public PublishSubject<Foo> getSubject() {
-        return subject;
+    public PublishSubject<Foo> getSubject_channel1() {
+        return subject_channel1;
+    }
+    public PublishSubject<Foo> getSubject_channel2() {
+        return subject_channel2;
     }
 
-    public void publish(Foo payload){
+    public void publish(BusClientInterface.Bus bus, Foo payload){
         //this.direct.send(MessageBuilder.withPayload(payload).build());
-        this.broadcast.send(MessageBuilder.withPayload(payload).build());
+        switch (bus){
+            case DEALS:
+                this.channel1.send(MessageBuilder.withPayload(payload).build());
+                break;
+            case SYSTEM_EVENTS:
+                this.channel2.send(MessageBuilder.withPayload(payload).build());
+                break;
+        }
+
     }
 
-    public Subscription subscribe(Observer<Foo> t){
-           return  this.subject.subscribe(t);
+    public Subscription subscribe(BusClientInterface.Bus bus, Observer<Foo> t){
+
+        switch (bus){
+            case DEALS:
+                return  this.subject_channel1.subscribe(t);
+
+
+            case SYSTEM_EVENTS:
+                return  this.subject_channel2.subscribe(t);
+
+            default:
+                return null;
+
+        }
+
     }
+
     public void unSubscribe(Subscription s){
         s.unsubscribe();
     }

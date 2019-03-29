@@ -70,23 +70,23 @@ public class RunAllTests {
         try {
 
             //step1 : we subscribe 2 subscribers 1 and 2
-            Subscription s1 = channelServiceRxJava.subscribe(getObserver1());
-            Subscription s2 = channelServiceRxJava.subscribe(getObserver2());
+            Subscription s1 = channelServiceRxJava.subscribe(BusClientInterface.Bus.DEALS,getObserver1());
+            Subscription s2 = channelServiceRxJava.subscribe(BusClientInterface.Bus.DEALS, getObserver2());
 
             //step2 : we publish
             Foo foo1 = new Foo();
             foo1.setId(1);
             foo1.setName("rxjva message 1");
             foo1.setTag("1");
-            channelServiceRxJava.publish(foo1);
-            channelServiceRxJava.publish(foo1);
-            channelServiceRxJava.publish(foo1);
+            channelServiceRxJava.publish(BusClientInterface.Bus.DEALS,foo1);
+            channelServiceRxJava.publish(BusClientInterface.Bus.DEALS,foo1);
+            channelServiceRxJava.publish(BusClientInterface.Bus.DEALS,foo1);
 
 
             //step 3: we unsubscribe subscriber1
             s1.unsubscribe();
             Thread.sleep(3000);
-            channelServiceRxJava.publish(foo1);
+            channelServiceRxJava.publish(BusClientInterface.Bus.DEALS,foo1);
 
             // we sum foo.id received by subscriber 1 and 2
             // subscriber1 received both time -> sum = 2
@@ -131,7 +131,7 @@ public class RunAllTests {
     }
     @Test
     public void test3() {
-        PublishSubject<Foo> subject = channelServiceRxJava.getSubject();
+        PublishSubject<Foo> subject = channelServiceRxJava.getSubject_channel1();
 
         subject
                 .subscribe(getObserver1());

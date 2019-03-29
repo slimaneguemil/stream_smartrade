@@ -10,7 +10,14 @@
         <option value="$PROJECT_DIR$/ServiceProducer/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/BrokerConnector/pom.xml" />
+        <option value="$PROJECT_DIR$/RxJavaConnector/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/ClientReactor/pom.xml" />
+        <option value="$PROJECT_DIR$/ReactorConnector/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK" />

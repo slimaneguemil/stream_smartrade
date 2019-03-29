@@ -39,7 +39,7 @@ public class RunProcessorTest {
             Foo foo1 = new Foo();
             foo1.setId(100);
         foo1.setName("rxjva message 1");
-        foo1.setTag("1");
+        foo1.setAmount(1);
         bus.publish(BusClientInterface.Bus.DEALS, foo1);
 
     }

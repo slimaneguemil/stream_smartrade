@@ -46,7 +46,7 @@ public class RunCientRxJavaTest {
             Foo foo1 = new Foo();
             foo1.setId(1);
             foo1.setName("rxjva message 1");
-            foo1.setTag("1");
+            foo1.setAmount(1);
             bus.publish(BusClientInterface.Bus.DEALS,foo1);
 
             Thread.sleep(2000);
@@ -72,7 +72,7 @@ public class RunCientRxJavaTest {
             Foo foo1 = new Foo();
             foo1.setId(1);
             foo1.setName("rxjva message 1");
-            foo1.setTag("1");
+            foo1.setAmount(1);
             bus.publish(BusClientInterface.Bus.DEALS,foo1);
             bus.publish(BusClientInterface.Bus.DEALS,foo1);
             bus.publish(BusClientInterface.Bus.DEALS,foo1);
@@ -88,7 +88,7 @@ public class RunCientRxJavaTest {
             // subscriber1 received 3 times -> sum = 3
             // sunscriber2 received 4 times -> sum = 4
             // subscriber 1 and 2 recived -> sum = 3+4
-            assertTrue(MyFunctions.subscriber1 + MyFunctions.subscriber2 == 7);
+            assertTrue(MyFunctions.amount1 + MyFunctions.amount2 == 7);
 
 
 

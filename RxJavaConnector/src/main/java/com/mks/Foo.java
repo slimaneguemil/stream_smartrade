@@ -4,28 +4,20 @@ import java.io.Serializable;
 
 public class Foo implements Serializable {
     int id;
-
-   /* public Foo() {
-    }
-
-    public Foo(int id, String name, String tag) {
-        this.id = id;
-        this.name = name;
-        this.tag = tag;
-    }*/
-
     String name;
+
+
+    double amount;
 
     @Override
     public String toString() {
         return "Foo{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", tag='" + tag + '\'' +
+                ", tag='" + amount + '\'' +
                 '}';
     }
 
-    String tag;
 
     public int getId() {
         return id;
@@ -43,12 +35,12 @@ public class Foo implements Serializable {
         this.name = name;
     }
 
-    public String getTag() {
-        return tag;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
 }

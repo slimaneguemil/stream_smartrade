@@ -7,7 +7,7 @@ import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.context.annotation.PropertySource;
 
-@SpringBootApplication
+//@SpringBootApplication
 @PropertySource("classpath:application-broker.properties")
 @EnableBinding({ProducerChannels.class, ConsumerChannels.class})
 public class ChannelStreams {

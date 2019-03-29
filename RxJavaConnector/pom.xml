@@ -59,16 +59,10 @@
             <version>${rx.java.string.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.jayway.awaitility</groupId>
-            <artifactId>awaitility</artifactId>
-            <version>${awaitility.version}</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+            <version>5.1.5.RELEASE</version>
         </dependency>
-        <dependency>
-            <groupId>com.github.davidmoten</groupId>
-            <artifactId>rxjava-jdbc</artifactId>
-            <version>${rx.java.jdbc.version}</version>
-        </dependency>
-
 
     </dependencies>
 

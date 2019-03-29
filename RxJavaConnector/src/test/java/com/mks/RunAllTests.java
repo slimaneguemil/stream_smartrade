@@ -21,8 +21,8 @@ import static junit.framework.TestCase.assertTrue;
 //@ActiveProfiles("test")
 @TestPropertySource(locations = "/application-test.properties")
 //@TestPropertySource(properties = "mks.topic=test5")
-@SpringBootTest (classes=  {ChannelStreams.class, ChannelServiceRxJava.class} )
-
+//@SpringBootTest (classes=  {ChannelStreams.class, ChannelServiceRxJava.class} )
+@SpringBootTest
 //@ComponentScan
 public class RunAllTests {
 

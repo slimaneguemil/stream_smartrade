@@ -12,6 +12,8 @@
         <module>ClientReactor</module>
         <module>ClientRxJava</module>
         <module>ClientRest</module>
+        <module>ReactorConnector</module>
+        <module>RxJavaConnector</module>
     </modules>
 
     <parent>

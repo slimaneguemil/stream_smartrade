@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,13 +14,12 @@ import rx.Observer;
 import rx.Subscription;
 import rx.subjects.PublishSubject;
 
+import java.sql.ClientInfoStatus;
+
 
 @RestController
 @SpringBootApplication
 public class RunSimulatorRxJava implements CommandLineRunner {
-
-    @Autowired
-    ChannelServiceRxJava channelServiceRxJava;
 
     Log log = LogFactory.getLog(getClass());
     //ChannelServiceRxJava channelService;
@@ -30,26 +30,24 @@ public class RunSimulatorRxJava implements CommandLineRunner {
     }
 
     public void run(String[] args) {
-        //PublishSubject<Foo> subject = channelServiceRxJava.getSubject();
 
-       // Subscription s1 = subject.subscribe(getFirstObserver());
-//        Subscription s1 = channelServiceRxJava.subscribe(getFirstObserver());
-//        Subscription s2 = channelServiceRxJava.subscribe(getSecondObserver());
+         Subscription s1 = busClientRxJava().subscribe(getFirstObserver());
+  //      Subscription s2 = channelServiceRxJava.subscribe(getSecondObserver());
 //
-//        Foo foo1 = new Foo();
-//        foo1.setId(100);
-//        foo1.setName("rxjva message 1");
-//        foo1.setTag("1");
-//        channelServiceRxJava.publish(foo1);
+        Foo foo1 = new Foo();
+        foo1.setId(100);
+        foo1.setName("rxjva message 1");
+        foo1.setTag("1");
+        busClientRxJava().publish(foo1);
 //
 //        Foo foo2 = new Foo();
 //        foo2.setId(100);
 //        foo2.setName("rxjava message 2");
 //        foo2.setTag("1");
-//        channelServiceRxJava.publish(foo2);
-//       channelServiceRxJava.unSubscribe(s1);
-//        //s1.unsubscribe();
-//
+//        busClientRxJava().publish(foo2);
+//        busClientRxJava().unSubscribe(s1);
+//        s1.unsubscribe();
+
 //        Foo foo3 = new Foo();
 //        foo3.setId(100);
 //        foo3.setName("rx java message 3");
@@ -107,9 +105,14 @@ public class RunSimulatorRxJava implements CommandLineRunner {
         foo1.setName(message);
         foo1.setTag("1");
 
-        channelServiceRxJava.publish(foo1);
+        busClientRxJava().publish(foo1);
         return "//nSuccess";
     }
 
+
+    @Bean
+    BusClientInterface busClientRxJava(){
+        return new BusClientRxJava();
+    }
 
 }

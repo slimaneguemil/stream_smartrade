@@ -32,10 +32,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.MessageBuilder;
 
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -48,28 +45,31 @@ import java.util.concurrent.atomic.AtomicLong;
 @SpringBootApplication
 
 public class RunPollDemo {
-
-    private static final long start = System.currentTimeMillis();
+   private static final long start = System.currentTimeMillis();
 
     public static final ExecutorService exec = Executors.newSingleThreadExecutor();
-    static CountDownLatch count ;
+    static CountDownLatch latch ;
     public static void main(String[] args) {
-        count= new CountDownLatch(1);
+        latch = new CountDownLatch(1);
         try {
         ApplicationContext context = SpringApplication.run(RunPollDemo.class, args);
         utils.log("Launching program");
         FlowService bus = context.getBean(FlowService.class);
-        //bus.subscribe(getSubscriber());
-        // bus.getFlow().subscribe(s -> System.out.println("@flowable subscriber = " + s));
+        bus.subscribe(getSubscriber());
+        //bus.getFlow().subscribe(s -> System.out.println("@flowable subscriber = " + s));
         //generateMessages(bus);
-            bus.rangeReverse2(0,200)
-                    .onBackpressureBuffer(1)
-                    .subscribe(i -> {
-                        utils.sleep(400);
-                        System.out.println("Received " + i);
-                    });
+//            bus.rangeReverse2(0,200)
+//                    .onBackpressureDrop()
+//                    .observeOn(Schedulers.io())
+//                    .publish()
+//                    .autoConnect()
+//                    .doOnNext(s -> System.out.println("do On next = " + s))
+//                    .subscribe(i -> {
+//                        utils.sleep(200);
+//                        System.out.println("Received " + i);
+//                    });
 
-            count.await();
+            latch.await();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -90,9 +90,14 @@ public class RunPollDemo {
             @Override
             public void onNext(Message Message) {
                 utils.log("@NewSubscriber 1 received = "+Message) ;
-//                Message.setEnd(System.currentTimeMillis());
-//                long timing = Message.getEnd() - Message.getStart();
-//                utils.log(Message.getEnd() + "-" + Message.getStart() + "->" + timing);
+                Message.setEnd(System.currentTimeMillis());
+                long timing = Message.getEnd() - Message.getStart();
+                utils.log(Message.getEnd() + "-" + Message.getStart() + "->" + timing);
+                try {
+                    Thread.sleep(ThreadLocalRandom.current().nextInt(700 ));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 //                // if (count.incrementAndGet() == 2)
 //                //    s.cancel();
                 s.request(1);
@@ -138,8 +143,8 @@ public class RunPollDemo {
             exec.execute(() -> {
                 boolean result = false;
                 //Observable.interval(2000, TimeUnit.MILLISECONDS)
-                Observable.range(1, 200)
-                        .takeUntil(i -> i > 200)
+                Observable.range(1, 30000)
+                        .takeUntil(i -> i > 2000)
 
 //                        .map(i -> {
 //                            long l = System.currentTimeMillis();
@@ -153,10 +158,10 @@ public class RunPollDemo {
                             utils.log("from @Bean: new Message :" + s + "time:" + l);
                             output.send(MessageBuilder.withPayload(utils.getMessage(s.intValue(), "from @Bean", l))
                                     .build());
-                            utils.sleep(utils.sleepRandom(1000));
-
+                            //utils.sleep(utils.sleepRandom(500));
+                                utils.sleep(1000);
                         });
-                count.countDown();
+
             });
         };
     }

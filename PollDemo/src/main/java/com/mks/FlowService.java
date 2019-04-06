@@ -2,6 +2,8 @@ package com.mks;
 
 import com.mks.utils.Message;
 import com.mks.utils.utils;
+import io.reactivex.BackpressureOverflowStrategy;
+import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.flowables.ConnectableFlowable;
@@ -39,8 +41,8 @@ public class FlowService {
 //                .map(s -> generate(pollChannel))
 
 
-        flow = mockMessage(pollChannel)
-                .subscribeOn(Schedulers.computation())
+        flow = rangeReverse2(0,1000)
+               // .subscribeOn(Schedulers.computation())
                 .observeOn(Schedulers.io())
                 .publish()
                 .autoConnect();
@@ -58,9 +60,11 @@ public class FlowService {
         this.output = output;
 
 
-        flow = mockMessage(pollChannel)
-
-                .subscribeOn(Schedulers.computation())
+        flow = rangeReverse2(0,200)
+               // .subscribeOn(Schedulers.computation())
+                .onBackpressureBuffer(2000,
+                        ()-> utils.log("Buffer Overflow ********************** " )
+                , BackpressureOverflowStrategy.ERROR)
                 .observeOn(Schedulers.io())
                 .publish()
                 .refCount(1);
@@ -91,7 +95,7 @@ public class FlowService {
 
                     int current = state.incrementAndGet();
                     boolean result = false;
-                    utils.log("pollling renverse2 " + current);
+                    //utils.log("pollling renverse2 " + current);
 
                     result = this.pollChannel.poll(m -> {
                         Message payload = (Message) m.getPayload();
@@ -100,7 +104,7 @@ public class FlowService {
 
                     }, new ParameterizedTypeReference<Message>() {
                     });
-                    utils.sleep(500);
+                    utils.sleep(50);
 //                    if (current == lowerBound)
 //                        emitter.onComplete();
                 }

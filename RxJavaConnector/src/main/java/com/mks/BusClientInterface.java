@@ -1,12 +1,13 @@
 package com.mks;
 
-import rx.Observer;
-import rx.Subscription;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+import org.reactivestreams.Subscription;
 
 public interface BusClientInterface {
     public void publish(BusClientInterface.Bus bus ,Foo payload);
-    public Subscription subscribe(BusClientInterface.Bus bus ,Observer<Foo> t);
-    public void unSubscribe(Subscription s);
+    public Disposable subscribe(BusClientInterface.Bus bus , Observer<Foo> t);
+    public void unSubscribe(Disposable d);
 
     public enum Bus{
         DEALS,

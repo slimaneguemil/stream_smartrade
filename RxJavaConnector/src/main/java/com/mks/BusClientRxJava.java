@@ -1,10 +1,12 @@
 package com.mks;
 
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.subjects.Subject;
+import org.reactivestreams.Subscription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
-import rx.Observer;
-import rx.Subscription;
 
 //@Service
 //@Configurable
@@ -12,7 +14,9 @@ public class BusClientRxJava implements  BusClientInterface{
 
     @Autowired
     ChannelServiceRxJava channelServiceRxJava;
-
+    public Subject<Foo> getSubject_channel1() {
+        return channelServiceRxJava.getSubject_channel1();
+    }
 
     @Override
     public void publish(BusClientInterface.Bus bus ,Foo payload) {
@@ -20,13 +24,13 @@ public class BusClientRxJava implements  BusClientInterface{
     }
 
     @Override
-    public Subscription subscribe(BusClientInterface.Bus bus , Observer<Foo> t) {
+    public Disposable subscribe(BusClientInterface.Bus bus , Observer<Foo> t) {
         return channelServiceRxJava.subscribe(bus, t);
     }
 
     @Override
-    public void unSubscribe(Subscription s) {
-        channelServiceRxJava.unSubscribe(s);
+    public void unSubscribe(Disposable d) {
+        channelServiceRxJava.unSubscribe(d);
     }
 }
 

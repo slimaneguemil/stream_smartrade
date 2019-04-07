@@ -1,5 +1,6 @@
 package com.mks;
 
+import io.reactivex.Observer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +11,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
-import rx.Observer;
-import rx.Subscription;
-import rx.subjects.PublishSubject;
+
 
 import static junit.framework.TestCase.assertTrue;
 
@@ -53,25 +52,11 @@ public class RunAllTests {
         };
     }
     Observer<Foo> getObserver2() {
-        return new Observer<Foo>() {
+        return new Observer<Foo>(){
 
-            @Override
-            public void onNext(Foo value) {
-                subscriber2 += value.getId();
-                System.out.println("Subscriber2 received: " + value);
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                System.out.println("error");
-            }
-
-            @Override
-            public void onCompleted() {
-                System.out.println("Subscriber2completed");
-            }
-        };
+        }
     }
+
 
     @Test
     public void test1(){

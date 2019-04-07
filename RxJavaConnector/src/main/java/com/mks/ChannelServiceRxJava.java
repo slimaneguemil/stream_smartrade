@@ -1,20 +1,23 @@
 package com.mks;
 
+import io.reactivex.Observer;
+import io.reactivex.Scheduler;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.subjects.PublishSubject;
+import io.reactivex.subjects.Subject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.reactivestreams.Subscription;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
-import rx.Observer;
-import rx.Subscription;
-import rx.subjects.PublishSubject;
+
 
 @Service
 public class ChannelServiceRxJava implements BusClientInterface {
     Log log = LogFactory.getLog(getClass());
-    PublishSubject<Foo> subject_channel1 = PublishSubject.create();
-    PublishSubject<Foo> subject_channel2 = PublishSubject.create();
+    Subject<Foo> subject_channel1 = PublishSubject.create();
+    Subject<Foo> subject_channel2 = PublishSubject.create();
 
     private final MessageChannel channel1, channel2;
 
@@ -25,10 +28,10 @@ public class ChannelServiceRxJava implements BusClientInterface {
         this.channel2 = channels.output2();
     }
 
-    public PublishSubject<Foo> getSubject_channel1() {
+    public Subject<Foo> getSubject_channel1() {
         return subject_channel1;
     }
-    public PublishSubject<Foo> getSubject_channel2() {
+    public Subject<Foo> getSubject_channel2() {
         return subject_channel2;
     }
 
@@ -45,15 +48,15 @@ public class ChannelServiceRxJava implements BusClientInterface {
 
     }
 
-    public Subscription subscribe(BusClientInterface.Bus bus, Observer<Foo> t){
+    public Disposable subscribe(Bus bus, Observer<Foo> t){
 
         switch (bus){
             case DEALS:
-                return  this.subject_channel1.subscribe(t);
 
+                 this.subject_channel1.subscribe(t);
 
             case SYSTEM_EVENTS:
-                return  this.subject_channel2.subscribe(t);
+                this.subject_channel2.subscribe(t);
 
             default:
                 return null;
@@ -62,9 +65,10 @@ public class ChannelServiceRxJava implements BusClientInterface {
 
     }
 
-    public void unSubscribe(Subscription s){
-        s.unsubscribe();
+    public void unSubscribe(Disposable d){
+        d.dispose();
     }
 
+  
 
 }

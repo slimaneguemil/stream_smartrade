@@ -4,19 +4,15 @@ import com.mks.BusClientInterface;
 import com.mks.BusClientRxJava;
 import com.mks.Foo;
 import com.mks.config.TestConfig;
+import io.reactivex.Observer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
-import rx.Observer;
-import rx.Subscription;
 
-import static org.junit.Assert.assertTrue;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@ContextConfiguration(classes = TestConfig.class)
@@ -34,7 +30,7 @@ public class RunProcessorTest {
          //BusClientInterface bus = (BusClientRxJava) context.getBean("testBus");
         BusClientInterface bus = (BusClientRxJava) context.getBean("testBus");
 
-        Subscription s1 = bus.subscribe(BusClientInterface.Bus.DEALS, getFirstObserver());
+        bus.subscribe(BusClientInterface.Bus.DEALS, getFirstObserver());
 
             Foo foo1 = new Foo();
             foo1.setId(100);

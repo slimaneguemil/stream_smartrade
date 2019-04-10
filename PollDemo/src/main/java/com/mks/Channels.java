@@ -23,7 +23,7 @@ public class Channels {
         //for System:logs
         @Input(INPUT2)
         PollableMessageSource input2();
-        @Output
+        @Output(OUTPUT2)
         MessageChannel output2();
 
 

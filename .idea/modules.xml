@@ -8,6 +8,8 @@
       <module fileurl="file://$PROJECT_DIR$/PollDemo/PollDemo.iml" filepath="$PROJECT_DIR$/PollDemo/PollDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/PollDemoSubject/PollDemoSubject.iml" filepath="$PROJECT_DIR$/PollDemoSubject/PollDemoSubject.iml" />
       <module fileurl="file://$PROJECT_DIR$/Publisher1/Publisher1.iml" filepath="$PROJECT_DIR$/Publisher1/Publisher1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RxJava2Client/RxJava2Client.iml" filepath="$PROJECT_DIR$/RxJava2Client/RxJava2Client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RxJava2Connector/RxJava2Connector.iml" filepath="$PROJECT_DIR$/RxJava2Connector/RxJava2Connector.iml" />
       <module fileurl="file://$PROJECT_DIR$/rxjava/rxjava.iml" filepath="$PROJECT_DIR$/rxjava/rxjava.iml" />
       <module fileurl="file://$PROJECT_DIR$/smartrade2_object.iml" filepath="$PROJECT_DIR$/smartrade2_object.iml" />
     </modules>

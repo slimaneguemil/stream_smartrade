@@ -1,15 +1,13 @@
 package com.mks.utils;
 
-import com.mks.Foo;
 import lombok.Data;
 
 @Data
-
-public class Message {
+public class Deal {
 
     private  long start ;
     private  long end ;
-    private Foo Data;
+    private com.mks.utils.Data data;
 
 
 }

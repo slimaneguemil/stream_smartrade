@@ -5,9 +5,11 @@
       <module fileurl="file://$PROJECT_DIR$/BrokerConnector/BrokerConnector.iml" filepath="$PROJECT_DIR$/BrokerConnector/BrokerConnector.iml" />
       <module fileurl="file://$PROJECT_DIR$/ClientRest/ClientRest.iml" filepath="$PROJECT_DIR$/ClientRest/ClientRest.iml" />
       <module fileurl="file://$PROJECT_DIR$/ClientRxJava/ClientRxJava.iml" filepath="$PROJECT_DIR$/ClientRxJava/ClientRxJava.iml" />
-      <module fileurl="file://$PROJECT_DIR$/RxJavaConnector/RxJavaConnector.iml" filepath="$PROJECT_DIR$/RxJavaConnector/RxJavaConnector.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PollDemo/PollDemo.iml" filepath="$PROJECT_DIR$/PollDemo/PollDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PollDemoSubject/PollDemoSubject.iml" filepath="$PROJECT_DIR$/PollDemoSubject/PollDemoSubject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Publisher1/Publisher1.iml" filepath="$PROJECT_DIR$/Publisher1/Publisher1.iml" />
       <module fileurl="file://$PROJECT_DIR$/rxjava/rxjava.iml" filepath="$PROJECT_DIR$/rxjava/rxjava.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/stream_smartrade2_RxJava.iml" filepath="$PROJECT_DIR$/.idea/stream_smartrade2_RxJava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/smartrade2_object.iml" filepath="$PROJECT_DIR$/smartrade2_object.iml" />
     </modules>
   </component>
 </project>

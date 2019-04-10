@@ -1,41 +1,40 @@
 package com.mks.utils;
 
-import com.mks.Foo;
-
 import java.util.concurrent.ThreadLocalRandom;
 
 public class utils {
     private static final long start = System.currentTimeMillis();
 
-    static Foo getFoo(){
-        Foo foo = new Foo();
-        foo.setId(1);
-        foo.setName("getfoo");
-        foo.setAmount(ThreadLocalRandom.current().nextDouble());
-        return foo;
+    static Data getData() {
+        Data Data = new Data();
+        Data.setId(1L);
+        Data.setName("getData");
+        Data.setAmount(ThreadLocalRandom.current().nextDouble());
+        return Data;
     }
 
-    static Foo getFoo(int id){
-        Foo foo = new Foo();
-        foo.setId(id);
-        foo.setName("getfoo-id");
-        foo.setAmount(ThreadLocalRandom.current().nextDouble());
-        return foo;
+    static Data getData(Long id) {
+        Data Data = new Data();
+        Data.setId(id);
+        Data.setName("getData-id");
+        Data.setAmount(ThreadLocalRandom.current().nextDouble());
+        return Data;
     }
 
-    static Foo getFoo(int id, String name) {
-        Foo foo = new Foo();
-        foo.setId(id);
-        foo.setName(name);
-        foo.setAmount(ThreadLocalRandom.current().nextDouble());
-        return foo;
+    static Data getData(Long id, String name) {
+        Data Data = new Data();
+        Data.setId(id);
+        Data.setName(name);
+        Data.setAmount(ThreadLocalRandom.current().nextDouble());
+        return Data;
     }
 
-        public static Message getMessage(int id, String name, long time){
-        Message message = new Message();
-        message.setStart(time);
-        message.setData(getFoo(id,name));
-        return message;
+    public static Deal2 getDeal(Long id, String name, long time) {
+        Deal2 deal = new Deal2();
+        deal.setName("dede");
+        deal.setStart(time);
+        deal.setData(getData(id, name));
+        return deal;
     }
 
     public static void sleep(long millis) {
@@ -45,23 +44,24 @@ public class utils {
             e.printStackTrace();
         }
     }
+
     public static int sleepRandom(int millis) {
 
-            return ThreadLocalRandom.current().nextInt(millis);
+        return ThreadLocalRandom.current().nextInt(millis);
 
     }
 
-    public static <T>T intenseCalculation(T value){
+    public static <T> T intenseCalculation(T value) {
         sleep(ThreadLocalRandom.current().nextInt(2000));
-        return  value;
+        return value;
     }
 
-    public static void log(Object label){
+    public static void log(Object label) {
         System.out.println(
-                System.currentTimeMillis() - start +"\t|" +
-                Thread.currentThread().getName()  +"\t|" +
-                label
-                );
+                System.currentTimeMillis() - start + "\t|" +
+                        Thread.currentThread().getName() + "\t|" +
+                        label
+        );
     }
 
 }

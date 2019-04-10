@@ -11,6 +11,9 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/BrokerConnector/pom.xml" />
         <option value="$PROJECT_DIR$/RxJavaConnector/pom.xml" />
+        <option value="$PROJECT_DIR$/Publisher1/pom.xml" />
+        <option value="$PROJECT_DIR$/PollDemo/pom.xml" />
+        <option value="$PROJECT_DIR$/PollDemoSubject/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

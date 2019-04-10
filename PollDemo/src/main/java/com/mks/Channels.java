@@ -11,11 +11,21 @@ public class Channels {
 
     public interface PolledProcessor {
 
+        static String INPUT2="input2";
+        static String OUTPUT2="output2";
+
+        //for Deals
         @Input
         PollableMessageSource input();
-
         @Output
         MessageChannel output();
+
+        //for System:logs
+        @Input(INPUT2)
+        PollableMessageSource input2();
+        @Output
+        MessageChannel output2();
+
 
     }
 }

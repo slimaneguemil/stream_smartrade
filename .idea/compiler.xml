@@ -9,8 +9,10 @@
         <module name="BrokerConnector" />
         <module name="ClientRest" />
         <module name="ClientRxJava" />
+        <module name="PollDemo" />
+        <module name="PollDemoSubject" />
+        <module name="Publisher1" />
         <module name="rxjava" />
-        <module name="RxJavaConnector" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -18,11 +20,16 @@
       <module name="ClientReactor" target="1.8" />
       <module name="ClientRest" target="1.8" />
       <module name="ClientRxJava" target="1.8" />
+      <module name="PollDemo" target="1.8" />
+      <module name="PollDemoSubject" target="1.8" />
+      <module name="Publisher1" target="1.8" />
+      <module name="Publisher2" target="1.8" />
       <module name="ReactorConnector" target="1.8" />
       <module name="rxjava" target="8" />
       <module name="rxjava2" target="1.8" />
       <module name="RxJavaConnector" target="1.8" />
       <module name="ServiceProducer" target="1.8" />
+      <module name="smartrade2_object" target="1.8" />
       <module name="stream_smartrade2_RxJava" target="1.8" />
     </bytecodeTargetLevel>
   </component>
@@ -32,6 +39,10 @@
       <module name="ClientReactor" options="-parameters" />
       <module name="ClientRest" options="-parameters" />
       <module name="ClientRxJava" options="-parameters" />
+      <module name="PollDemo" options="-parameters" />
+      <module name="PollDemoSubject" options="-parameters" />
+      <module name="Publisher1" options="-parameters" />
+      <module name="Publisher2" options="-parameters" />
       <module name="ReactorConnector" options="-parameters" />
       <module name="RxJavaConnector" options="-parameters" />
       <module name="ServiceProducer" options="-parameters" />

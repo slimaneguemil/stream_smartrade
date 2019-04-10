@@ -16,7 +16,7 @@
 
 package com.mks;
 
-import com.mks.utils.Message;
+import com.mks.utils.Deal;
 import com.mks.utils.utils;
 import io.reactivex.Observable;
 import org.reactivestreams.Subscriber;
@@ -56,8 +56,8 @@ public class RunPollDemoV1 {
     }
 
 
-    public static Subscriber<Message> getSubscriber() {
-        return new Subscriber<Message>() {
+    public static Subscriber<Deal> getSubscriber() {
+        return new Subscriber<Deal>() {
             AtomicLong count = new AtomicLong(0);
             Subscription s;
 
@@ -68,7 +68,7 @@ public class RunPollDemoV1 {
             }
 
             @Override
-            public void onNext(Message Message) {
+            public void onNext(Deal Message) {
                 System.out.println("@NewSubscriber 1 received = " + Message);
                 if (count.incrementAndGet() == 2)
                     s.cancel();
@@ -93,7 +93,7 @@ public class RunPollDemoV1 {
                 // Observable.range(1, 1)
                 // .map( v -> utils.intenseCalculation(v))
                 .map(v -> {
-                    return utils.getMessage(v.intValue(), "from @generatefoos",System.currentTimeMillis());
+                    return utils.getDeal(v, "from @generatefoos",System.currentTimeMillis());
                 })
                 .subscribe(s -> {
                             System.out.println("@generateMessages : sending from generateMessages = " + s);
@@ -108,7 +108,7 @@ public class RunPollDemoV1 {
 
 
     @Bean
-    public ApplicationRunner runner(PollableMessageSource input, MessageChannel output) {
+    public ApplicationRunner runner(MessageChannel output) {
         return args -> {
             System.out.println("@Bean : starting");
             exec.execute(() -> {
@@ -116,7 +116,7 @@ public class RunPollDemoV1 {
                 Observable.interval(2, TimeUnit.SECONDS)
                         //Observable.range(1, 1)
                         .map(i -> {
-                            return utils.getMessage(i.intValue(), "from @Bean",System.currentTimeMillis());
+                            return utils.getDeal(i, "from @Bean",System.currentTimeMillis());
                         }).subscribe(s -> {
                     output.send(MessageBuilder.withPayload(s)
                             .build());

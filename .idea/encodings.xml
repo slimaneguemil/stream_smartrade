@@ -2,12 +2,11 @@
 <project version="4">
   <component name="Encoding" addBOMForNewFiles="with NO BOM">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/BrokerConnector" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ClientReactor" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ClientRest" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ClientRxJava" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ReactorConnector" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/RxJavaConnector" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/PollDemo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/PollDemoSubject" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Publisher1" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Publisher2" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/RxJavaConnector" charset="UTF-8" />
   </component>
 </project>

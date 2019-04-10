@@ -16,29 +16,25 @@
 
 package com.mks;
 
-import com.mks.utils.Message;
+import com.mks.utils.Deal;
+import com.mks.utils.Deal2;
 import com.mks.utils.utils;
-import io.reactivex.Flowable;
 import io.reactivex.Observable;
-import io.reactivex.schedulers.Schedulers;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.stream.binder.PollableMessageSource;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.MessageBuilder;
 
 import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Sample app demonstrating a polled consumer where the application can
- * control the rate at which messages are retrieved.
+ * control the rate at which Deals are retrieved.
  *
  * @author Gary Russell
  */
@@ -48,36 +44,54 @@ public class RunPollDemo {
    private static final long start = System.currentTimeMillis();
 
     public static final ExecutorService exec = Executors.newSingleThreadExecutor();
-    static CountDownLatch latch ;
     public static void main(String[] args) {
-        latch = new CountDownLatch(1);
-        try {
-        ApplicationContext context = SpringApplication.run(RunPollDemo.class, args);
-        utils.log("Launching program");
-        FlowService bus = context.getBean(FlowService.class);
-        bus.subscribe(getSubscriber());
-        //bus.getFlow().subscribe(s -> System.out.println("@flowable subscriber = " + s));
-        //generateMessages(bus);
-//            bus.rangeReverse2(0,200)
-//                    .onBackpressureDrop()
-//                    .observeOn(Schedulers.io())
-//                    .publish()
-//                    .autoConnect()
-//                    .doOnNext(s -> System.out.println("do On next = " + s))
-//                    .subscribe(i -> {
-//                        utils.sleep(200);
-//                        System.out.println("Received " + i);
-//                    });
-
-            latch.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+            SpringApplication.run(RunPollDemo.class, args);
     }
 
 
-    public static Subscriber<Message> getSubscriber() {
-        return new Subscriber<Message>() {
+    @Bean
+    public ApplicationRunner runner( MessageChannel output, FlowService bus) {
+        return args -> {
+            System.out.println("@Bean : starting");
+            bus.getFlow()
+                    .subscribe(getSubscriber());
+
+            exec.execute(() -> {
+                boolean result = false;
+                //Observable.interval(2000, TimeUnit.MILLISECONDS)
+                Observable.range(1, 3)
+                        .takeUntil(i -> i > 20000)
+
+//                        .map(i -> {
+//                            long l = System.currentTimeMillis();
+//                            utils.log("from @Bean: new Deal :" + i + "time:" + l);
+//                            return utils.getDeal(i.intValue(), "from @Bean", l);
+//                        })
+                        .publish().autoConnect()
+
+                        .subscribe(s -> {
+                            long l = System.currentTimeMillis();
+                            utils.log("from @Bean: new Deal :" + s + "time:" + l);
+                            if (s==2){
+                                Deal2 m2 = new Deal2();
+                                m2.setName("toto");
+                                m2.setStart(System.currentTimeMillis() );
+                                output.send((MessageBuilder.withPayload(m2).build()));
+                            }
+                               else
+                            output.send(MessageBuilder.withPayload(utils.getDeal(s.longValue(), "from @Bean", l))
+                                    .build());
+                            //utils.sleep(utils.sleepRandom(500));
+                                utils.sleep(50);
+                        });
+
+            });
+        };
+    }
+
+
+    public static Subscriber<Deal> getSubscriber() {
+        return new Subscriber<Deal>() {
             AtomicLong count = new AtomicLong(0);
             Subscription s;
 
@@ -88,11 +102,11 @@ public class RunPollDemo {
             }
 
             @Override
-            public void onNext(Message Message) {
-                utils.log("@NewSubscriber 1 received = "+Message) ;
-                Message.setEnd(System.currentTimeMillis());
-                long timing = Message.getEnd() - Message.getStart();
-                utils.log(Message.getEnd() + "-" + Message.getStart() + "->" + timing);
+            public void onNext(Deal Deal) {
+                utils.log("@NewSubscriber 1 received = "+Deal) ;
+                Deal.setEnd(System.currentTimeMillis());
+                long timing = Deal.getEnd() - Deal.getStart();
+                utils.log(Deal.getEnd() + "-" + Deal.getStart() + "->" + timing);
                 try {
                     Thread.sleep(ThreadLocalRandom.current().nextInt(700 ));
                 } catch (InterruptedException e) {
@@ -115,55 +129,24 @@ public class RunPollDemo {
         };
     }
 
-    public static void generateMessages(FlowService bus) {
+    public static void generateDeals(FlowService bus) {
 
-        System.out.println("@generateMessages staring ...");
+        System.out.println("@generateDeals staring ...");
         Observable.interval(2, TimeUnit.SECONDS)
                 // Observable.range(1, 1)
                 // .map( v -> utils.intenseCalculation(v))
                 .map(v -> {
-                    return utils.getMessage(v.intValue(), "from @generatefoos", System.currentTimeMillis());
+                    return utils.getDeal(v, "from @generatefoos", System.currentTimeMillis());
                 })
                 .subscribe(s -> {
-                            System.out.println("@generateMessages : sending from generateMessages = " + s);
-                            bus.getOutput().send(MessageBuilder.withPayload(s)
+                            System.out.println("@generateDeals : sending from generateDeals = " + s);
+                            bus.send(MessageBuilder.withPayload(s)
                                     .setHeader("start", System.currentTimeMillis())
                                     .build());
                         }
                 );
 
 
-    }
-
-
-    @Bean
-    public ApplicationRunner runner(PollableMessageSource input, MessageChannel output) {
-        return args -> {
-            System.out.println("@Bean : starting");
-            exec.execute(() -> {
-                boolean result = false;
-                //Observable.interval(2000, TimeUnit.MILLISECONDS)
-                Observable.range(1, 30000)
-                        .takeUntil(i -> i > 2000)
-
-//                        .map(i -> {
-//                            long l = System.currentTimeMillis();
-//                            utils.log("from @Bean: new Message :" + i + "time:" + l);
-//                            return utils.getMessage(i.intValue(), "from @Bean", l);
-//                        })
-                        .publish().autoConnect()
-                        .delay(2, TimeUnit.SECONDS)
-                        .subscribe(s -> {
-                            long l = System.currentTimeMillis();
-                            utils.log("from @Bean: new Message :" + s + "time:" + l);
-                            output.send(MessageBuilder.withPayload(utils.getMessage(s.intValue(), "from @Bean", l))
-                                    .build());
-                            //utils.sleep(utils.sleepRandom(500));
-                                utils.sleep(1000);
-                        });
-
-            });
-        };
     }
 
 

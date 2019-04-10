@@ -29,7 +29,7 @@
       <module name="ReactorConnector" target="1.8" />
       <module name="rxjava" target="8" />
       <module name="rxjava2" target="1.8" />
-      <module name="RxJava2Client" target="7" />
+      <module name="RxJava2Client" target="8" />
       <module name="RxJava2Connector" target="1.8" />
       <module name="RxJavaConnector" target="1.8" />
       <module name="ServiceProducer" target="1.8" />

@@ -28,7 +28,7 @@ public class RunPublisher1 {
     public Deal timeemitter2() {
         Deal m = utils.getDeal(
 
-                count.incrementAndGet(),"from @InnboundAdaptater",
+                count.incrementAndGet(),"from @automatic/@Publisher1",
                 System.currentTimeMillis());
 
         utils.log("@InboundChannelAdapter pushing foo = " + m);

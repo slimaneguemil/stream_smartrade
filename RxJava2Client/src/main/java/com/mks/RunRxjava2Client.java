@@ -17,15 +17,16 @@
 package com.mks;
 
 import com.mks.broker.BusClientInterface;
-import com.mks.broker.BusClientRxJava2;
 import com.mks.broker.utils.Deal;
+import com.mks.broker.utils.Event;
 import com.mks.broker.utils.utils;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -44,19 +45,18 @@ public class RunRxjava2Client {
 
     public static final ExecutorService exec = Executors.newSingleThreadExecutor();
     public static void main(String[] args) {
-        ApplicationContext context=
-            SpringApplication.run(RunRxjava2Client.class, args);
-        BusClientInterface bus = context.getBean(BusClientRxJava2.class);
-
-
-        bus.subscribe(BusClientInterface.Bus.DEALS, getSubscriber());
-
+        SpringApplication.run(RunRxjava2Client.class, args);
     }
 
+    @Bean
+    @Lazy
+    public ApplicationRunner runner( BusClientInterface bus) {
+        return args -> {
+           bus.subscribe(BusClientInterface.Bus.DEALS, getSubscriber(3));
+        };
+    }
 
-
-
-    public static Subscriber<Deal> getSubscriber() {
+    public static Subscriber<Deal> getSubscriber(int limit) {
         return new Subscriber<Deal>() {
             AtomicLong count = new AtomicLong(0);
             Subscription s;
@@ -78,9 +78,10 @@ public class RunRxjava2Client {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-//                // if (count.incrementAndGet() == 2)
-//                //    s.cancel();
-                s.request(1);
+                 if (count.incrementAndGet() == limit)
+                    s.cancel();
+                 else
+                    s.request(1);
             }
 
             public void onError(Throwable throwable) {
@@ -93,8 +94,4 @@ public class RunRxjava2Client {
         };
     }
 
-    @Bean("myBus")
-    BusClientInterface busClientRxJava() {
-        return new BusClientRxJava2();
-    }
 }

@@ -20,6 +20,7 @@ import com.mks.broker.BusClientInterface;
 import com.mks.broker.utils.Deal;
 import com.mks.broker.utils.Event;
 import com.mks.broker.utils.utils;
+import io.reactivex.Observable;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 import org.springframework.boot.ApplicationRunner;
@@ -27,6 +28,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.messaging.support.MessageBuilder;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -53,6 +55,25 @@ public class RunRxjava2Client {
     public ApplicationRunner runner( BusClientInterface bus) {
         return args -> {
            bus.subscribe(BusClientInterface.Bus.DEALS, getSubscriber(3));
+
+
+            exec.execute(() -> {
+                boolean result = false;
+                //Observable.interval(2000, TimeUnit.MILLISECONDS)
+                Observable.range(1, 10)
+                        .takeUntil(i -> i > 20000)
+                        .publish().autoConnect()
+                        .subscribe(s -> {
+                            long l = System.currentTimeMillis();
+                            utils.log("from @Bean: new Deal :" + s + "      time:" + l);
+                                bus.publish(BusClientInterface.Bus.DEALS, utils.getDeal(s.longValue(), "from @Bean", System.currentTimeMillis()));
+
+                            //utils.sleep(utils.sleepRandom(500));
+                            utils.sleep(50);
+                        });
+
+            });
+
         };
     }
 
@@ -78,10 +99,10 @@ public class RunRxjava2Client {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                 if (count.incrementAndGet() == limit)
-                    s.cancel();
-                 else
-                    s.request(1);
+//                 if (count.incrementAndGet() == limit)
+//                    s.cancel();
+//                 else
+                   s.request(1);
             }
 
             public void onError(Throwable throwable) {

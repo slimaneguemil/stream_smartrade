@@ -47,12 +47,12 @@ public class FlowService {
         this.channelOutputDeals = polledProcessor.output();
         this.channelOutputLogs = polledProcessor.output2();
 
-        flow = generateFlow(0,200)
+        flow = generateFlow(0,20)
                 .subscribeOn(Schedulers.computation())
                 .onBackpressureBuffer(1000,
                         ()-> utils.log("Buffer Overflow ********************** " )
                 , BackpressureOverflowStrategy.ERROR)
-                .observeOn(Schedulers.io())
+                .observeOn(Schedulers.newThread())
                 .publish()
                 .refCount(1);
     }

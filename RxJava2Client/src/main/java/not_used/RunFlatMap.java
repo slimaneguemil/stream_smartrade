@@ -14,22 +14,19 @@
  * limitations under the License.
  */
 
-package com.mks;
+package not_used;
 
 import com.mks.broker.BusClientInterface;
 import com.mks.broker.utils.Deal;
-import com.mks.broker.utils.Event;
 import com.mks.broker.utils.utils;
 import io.reactivex.Observable;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.messaging.support.MessageBuilder;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -43,12 +40,12 @@ import java.util.concurrent.atomic.AtomicLong;
  * @author Gary Russell
  */
 @SpringBootApplication
-public class RunRxjava2Client {
+public class RunFlatMap {
    private static final long start = System.currentTimeMillis();
 
     public static final ExecutorService exec = Executors.newSingleThreadExecutor();
     public static void main(String[] args) {
-        SpringApplication.run(RunRxjava2Client.class, args);
+        SpringApplication.run(RunFlatMap.class, args);
     }
 
     @Bean
@@ -56,6 +53,7 @@ public class RunRxjava2Client {
     public ApplicationRunner runner(BusClientInterface bus) {
         return args -> {
            bus.subscribe(BusClientInterface.Bus.DEALS, getSubscriber(3));
+
             exec.execute(() -> {
                 boolean result = false;
                 //Observable.interval(2000, TimeUnit.MILLISECONDS)

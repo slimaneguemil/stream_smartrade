@@ -1,0 +1,13 @@
+
+
+.subscribeOn(Schedulers.io())
+3358	|RxCachedThreadScheduler-1	|pollling frombroker: Deal(start=1555076527216, end=0, data=Data(id=62, name=from @Bean, amount=0.2220589483524983))
+3358	|RxCachedThreadScheduler-1	|Deal(start=1555076527216, end=0, data=Data(id=62, name=from @Bean, amount=0.2220589483524983))
+
+ .subscribeOn(Schedulers.computation())
+386	|RxComputationThreadPool-1	|pollling frombroker: Deal(start=1555076992726, end=0, data=Data(id=3, name=from @Bean, amount=0.3227831621255415))
+386	|RxComputationThreadPool-1	|Deal(start=1555076992726, end=0, data=Data(id=3, name=from @Bean, amount=0.3227831621255415))
+
+ .subscribeOn(Schedulers.newThread())
+208	|RxNewThreadScheduler-1	|pollling frombroker: Deal(start=1555077074736, end=0, data=Data(id=3, name=from @Bean, amount=0.9403742348020177))
+208	|RxNewThreadScheduler-1	|Deal(start=1555077074736, end=0, data=Data(id=3, name=from @Bean, amount=0.9403742348020177))

@@ -6,34 +6,35 @@ public class utils {
     private static final long start = System.currentTimeMillis();
 
     static Data getData() {
-        Data Data = new Data();
-        Data.setId(1L);
-        Data.setName("getData");
-        Data.setAmount(ThreadLocalRandom.current().nextDouble());
-        return Data;
+        Data data = new Data();
+        data.setId(1L);
+        data.setName("getData");
+        data.setAmount(ThreadLocalRandom.current().nextDouble());
+        return data;
     }
 
     static Data getData(Long id) {
-        Data Data = new Data();
-        Data.setId(id);
-        Data.setName("getData-id");
-        Data.setAmount(ThreadLocalRandom.current().nextDouble());
-        return Data;
+        Data data = new Data();
+        data.setId(id);
+        data.setName("getData-id");
+        data.setAmount(ThreadLocalRandom.current().nextDouble());
+        return data;
     }
 
     static Data getData(Long id, String name) {
-        Data Data = new Data();
-        Data.setId(id);
-        Data.setName(name);
-        Data.setAmount(ThreadLocalRandom.current().nextDouble());
-        return Data;
+        Data data = new Data();
+        data.setId(id);
+       data.setName(name);
+        data.setAmount(ThreadLocalRandom.current().nextDouble());
+        return data;
     }
 
-    public static Deal getDeal(Long id, String name, long time) {
-        Deal Deal = new Deal();
-        Deal.setStart(time);
-        Deal.setData(getData(id, name));
-        return Deal;
+    public static Deal getDeal(Long id, String name, long time, String version) {
+        Deal deal = new Deal();
+        deal.setStart(time);
+        deal.setData(getData(id, name));
+        deal.setVersion(version);
+        return deal;
     }
 
     public static void sleep(long millis) {

@@ -53,13 +53,13 @@ public class RunPollDemo {
     public ApplicationRunner runner( MessageChannel output, FlowService bus) {
         return args -> {
             System.out.println("@Bean : starting");
-            bus.getFlow()
-                    .subscribe(getSubscriber());
+//            bus.getFlow()
+//                    .subscribe(getSubscriber());
 
             exec.execute(() -> {
                 boolean result = false;
                 //Observable.interval(2000, TimeUnit.MILLISECONDS)
-                Observable.range(1, 3)
+                Observable.range(1, 30)
                         .takeUntil(i -> i > 20000)
 
 //                        .map(i -> {
